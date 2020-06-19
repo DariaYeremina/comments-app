@@ -4,6 +4,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import '@/plugins/veevalidate';
+import '@/styles/app.scss';
 
 Vue.config.productionTip = false;
 
