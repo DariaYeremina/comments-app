@@ -1,7 +1,7 @@
 export default {
   apiPrefix: `${process.env.VUE_APP_API_URL}`,
   endpoints: {
-
+    users: 'users',
   },
   get(endpointLabel, params) {
     if (this.endpoints[endpointLabel] === undefined) {
@@ -16,6 +16,6 @@ export default {
       url = url.substring(0, url.indexOf('/:'));
     }
 
-    return this.apiPrefix.concat(url);
+    return `${this.apiPrefix.concat(url)}?access-token=${process.env.VUE_APP_ACCESS_TOKEN}`;
   },
 };
