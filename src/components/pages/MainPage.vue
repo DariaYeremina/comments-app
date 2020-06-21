@@ -4,18 +4,18 @@
         <VSelect :options="users"
                 :placeholder="$t('select.placeholder')"
                 @select="fetchPosts($event)"></VSelect>
-        <PostsList></PostsList>
+        <VPostsList></VPostsList>
     </div>
 </template>
 
 <script>
 import VHeading from '@/components/atoms/VHeading.vue';
 import VSelect from '@/components/molecules/VSelect.vue';
-import PostsList from '@/components/organisms/PostsList.vue';
+import VPostsList from '@/components/organisms/VPostsList.vue';
 
 export default {
   name: 'MainPage',
-  components: { VHeading, VSelect, PostsList },
+  components: { VHeading, VSelect, VPostsList },
   computed: {
     users() {
       return this.$store.getters['users/getUsers'];

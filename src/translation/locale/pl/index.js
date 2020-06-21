@@ -5,5 +5,6 @@ export default {
   },
   buttons: {
     nextPost: 'Pokaż więcej',
+    showComments: 'Pokaż komentarze',
   },
 };

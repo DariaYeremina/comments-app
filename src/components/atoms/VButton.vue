@@ -1,5 +1,5 @@
 <template>
-    <button class="button"
+    <button :class="[secondary ? 'button_secondary' : 'button']"
             @click="emitClick">
         <slot></slot>
     </button>
@@ -8,6 +8,12 @@
 <script>
 export default {
   name: 'VButton',
+  props: {
+    secondary: {
+      type: Boolean,
+      default: false,
+    },
+  },
   methods: {
     emitClick() {
       this.$emit('click');
@@ -32,6 +38,17 @@ export default {
           color: $green;
           border-color: $green;
           background-color: #fff;
+        }
+        &_secondary {
+          @extend .button;
+          background-color: #fff;
+          color: $green;
+          border-color: $green;
+          &:hover {
+            background-color: $green;
+            color: #fff;
+            border-color: transparent;
+          }
         }
     }
 </style>

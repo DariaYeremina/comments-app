@@ -9,11 +9,11 @@
 </template>
 
 <script>
-import VPost from '@/components/molecules/VPost.vue';
+import VPost from '@/components/organisms/VPost.vue';
 import VButton from '@/components/atoms/VButton.vue';
 
 export default {
-  name: 'PostsList',
+  name: 'VPostsList',
   components: { VPost, VButton },
   data: () => ({
     visiblePosts: [],
@@ -23,11 +23,11 @@ export default {
     posts() {
       return this.$store.getters['posts/getPostsPerUser'];
     },
-    canShowNextPost() {
+    hasNextPost() {
       return this.posts.length > this.lastIndex + 1;
     },
     nextButtonVisible() {
-      return this.visiblePosts.length > 0 && this.canShowNextPost;
+      return this.visiblePosts.length > 0 && this.hasNextPost;
     },
   },
   watch: {
@@ -49,7 +49,7 @@ export default {
       this.lastIndex = null;
     },
     showNextPost() {
-      if (this.canShowNextPost) {
+      if (this.hasNextPost) {
         this.visiblePosts.push(this.posts[this.lastIndex + 1]);
       }
     },

@@ -5,4 +5,7 @@ export default {
   getPostsPerUser(userId) {
     return http.get(endpoints.get('postsPerUser', { userId }));
   },
+  getCommentsPerPost(postId) {
+    return http.get(endpoints.get('commentsPerPost', { postId }));
+  },
 };
