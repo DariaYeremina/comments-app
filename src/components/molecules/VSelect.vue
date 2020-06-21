@@ -2,11 +2,14 @@
     <div class="select"
         v-click-outside="hideOptions">
         <VInput @focus="showOptions"
-                :value="chosenOption.name"></VInput>
+                :placeholder="placeholder"
+                @input="filter"
+                :icon="inputIcon"
+                v-model="chosenOption.name"></VInput>
         <div class="select__options-wrapper"
             v-show="isOptionsActive">
             <p class="select__option"
-                v-for="(option, index) in options"
+                v-for="(option, index) in localOptions"
                 :key="index"
                 @click="select(option)">{{ optionText(option) }}</p>
         </div>
@@ -16,6 +19,9 @@
 <script>
 import VInput from '@/components/atoms/VInput.vue';
 import vClickOutside from 'v-click-outside';
+import filters from '@/filters/filters';
+import carretUp from '@/assets/icons/carretUp.svg';
+import carretDown from '@/assets/icons/carretDown.svg';
 
 export default {
   name: 'VSelect',
@@ -34,17 +40,37 @@ export default {
       type: String,
       default: 'id',
     },
+    placeholder: {
+      type: String,
+      required: false,
+    },
   },
   directives: {
     clickOutside: vClickOutside.directive,
   },
+  filters: { ...filters },
   data: () => ({
     isOptionsActive: false,
     chosenOption: {
       id: null,
-      name: null,
+      name: '',
     },
+    localOptions: [],
   }),
+  computed: {
+    inputIcon() {
+      return this.isOptionsActive ? carretUp : carretDown;
+    },
+  },
+  watch: {
+    options: {
+      handler(val) {
+        this.localOptions = val;
+      },
+      immediate: true,
+      deep: true,
+    },
+  },
   methods: {
     showOptions() {
       this.isOptionsActive = true;
@@ -60,11 +86,12 @@ export default {
       this.$emit('input', this.chosenOption.id);
       this.hideOptions();
     },
-    fullName(option) {
-      return `${option.first_name} ${option.last_name}`;
-    },
     optionText(option) {
-      return this.itemText === 'fullname' ? this.fullName(option) : option[this.itemText];
+      return this.itemText === 'fullname' ? this.$options.filters.fullName(option) : option[this.itemText];
+    },
+    filter() {
+      const regex = new RegExp(`${this.chosenOption.name.toLowerCase()}`);
+      this.localOptions = this.options.filter((el) => regex.test(el.last_name.toLowerCase()));
     },
   },
 };

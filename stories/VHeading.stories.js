@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue';
-import VHeading from '../src/components/atoms/VHeading.vue';
+import VHeading from '@/components/atoms/VHeading.vue';
 
 storiesOf('Atoms/Heading', module)
   .add('Simple heading', () => ({

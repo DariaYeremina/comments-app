@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
 import { text } from '@storybook/addon-knobs';
-import VInput from '../src/components/atoms/VInput.vue';
+import VInput from '@/components/atoms/VInput.vue';
 
 storiesOf('Atoms/VInput', module)
   .add('Simple input', () => ({

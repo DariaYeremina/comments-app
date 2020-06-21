@@ -2,6 +2,7 @@
     <div class="wrapper">
         <VHeading>{{ $t('appTitle') }}</VHeading>
         <VSelect :options="users"
+                :placeholder="$t('select.placeholder')"
                 v-model="chosenOption"></VSelect>
     </div>
 </template>

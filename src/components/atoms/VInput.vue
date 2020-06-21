@@ -13,7 +13,8 @@
                     v-bind="$attrs"
                     @focus="$emit('focus')"
                     @input="updateInput($event)"
-                    class="input"/>
+                    class="input"
+                    :style="background"/>
             <span v-if="errors && errors.length > 0"
                     class="error">{{ errors[0] }}</span>
          </ValidationProvider>
@@ -41,8 +42,17 @@ export default {
       type: [Object, String],
       default: '',
     },
+    icon: {
+      type: String,
+      default: '',
+    },
   },
   components: { ValidationProvider },
+  computed: {
+    background() {
+      return this.icon ? `background-image: url(${this.icon})` : null;
+    },
+  },
   methods: {
     updateInput(e) {
       this.$emit('input', e.target.value);
@@ -58,6 +68,9 @@ export default {
         padding: 7px 15px;
         font: inherit;
         border-radius: 4px;
+        background-repeat: no-repeat;
+        background-position: 98% center;
+        background-size: 2rem;
         &:focus {
             outline: none;
             border-color: $grey;
