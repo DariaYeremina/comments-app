@@ -70,7 +70,7 @@ export default {
         border-radius: 4px;
         background-repeat: no-repeat;
         background-position: 98% center;
-        background-size: 2rem;
+        background-size: 1.6rem;
         &:focus {
             outline: none;
             border-color: $grey;

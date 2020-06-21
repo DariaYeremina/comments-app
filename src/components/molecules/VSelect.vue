@@ -31,7 +31,6 @@ export default {
       required: true,
       type: Array,
     },
-    value: {},
     itemText: {
       type: String,
       default: 'fullname',
@@ -83,7 +82,7 @@ export default {
         id: option[this.itemId],
         name: this.optionText(option),
       };
-      this.$emit('input', this.chosenOption.id);
+      this.$emit('select', this.chosenOption.id);
       this.hideOptions();
     },
     optionText(option) {
@@ -101,6 +100,7 @@ export default {
     .select {
         width: 50%;
         position: relative;
+        margin-bottom: 10px;
         &__options-wrapper {
             position: absolute;
             width: 100%;
@@ -108,6 +108,8 @@ export default {
             padding: 5px 0;
             max-height: 400px;
             overflow-y: auto;
+            background: #fff;
+            z-index: 5;
         }
         &__option {
             padding: 10px;

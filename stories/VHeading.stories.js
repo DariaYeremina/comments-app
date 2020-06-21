@@ -3,6 +3,6 @@ import VHeading from '@/components/atoms/VHeading.vue';
 
 storiesOf('Atoms/Heading', module)
   .add('Simple heading', () => ({
-    template: '<VHeading @click="action">Lorem ipsum</VHeading>',
+    template: '<VHeading>Lorem ipsum</VHeading>',
     components: { VHeading },
   }));

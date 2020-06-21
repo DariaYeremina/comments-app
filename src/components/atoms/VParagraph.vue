@@ -1,20 +1,18 @@
 <template>
-    <h1 class="heading">
+    <p class="paragraph">
         <slot></slot>
-    </h1>
+    </p>
 </template>
 
 <script>
 export default {
-  name: 'VHeading',
+  name: 'VParagraph',
 };
 </script>
 
 <style lang="scss" scoped>
-.heading {
+.paragraph {
     color: $grey;
-    font-weight: $bold;
-    font-size: $font_xxl;
-    text-align: center;
+    font-size: $font_m;
 }
 </style>

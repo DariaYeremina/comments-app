@@ -3,4 +3,7 @@ export default {
   select: {
     placeholder: 'Wybierz użytkownika',
   },
+  buttons: {
+    nextPost: 'Pokaż więcej',
+  },
 };

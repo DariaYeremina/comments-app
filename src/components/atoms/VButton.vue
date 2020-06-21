@@ -19,10 +19,11 @@ export default {
 <style lang="scss" scoped>
     .button {
         font: inherit;
+        font-size: $font_m;
         background-color: $green;
         color: #fff;
         border: 1px solid transparent;
-        padding: 5px 15px;
+        padding: 10px 25px;
         outline: none;
         cursor: pointer;
         border-radius: 20px;

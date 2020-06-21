@@ -1,20 +1,20 @@
 <template>
-    <h1 class="heading">
+    <h3 class="subheading">
         <slot></slot>
-    </h1>
+    </h3>
 </template>
 
 <script>
 export default {
-  name: 'VHeading',
+  name: 'VSubheading',
 };
 </script>
 
 <style lang="scss" scoped>
-.heading {
+.subheading {
     color: $grey;
-    font-weight: $bold;
-    font-size: $font_xxl;
+    font-weight: $normal;
+    font-size: $font_l;
     text-align: center;
 }
 </style>
