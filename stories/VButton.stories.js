@@ -21,4 +21,15 @@ storiesOf('Atoms/Button', module)
     methods: {
       action: action('clicked'),
     },
+  }))
+  .add('Disabled button', () => ({
+    template: `<VButton @click="action"
+                        disabled>Hello Button</VButton>`,
+    components: { VButton },
+    props: {
+      disabled: boolean('disabled', true),
+    },
+    methods: {
+      action: action('clicked'),
+    },
   }));

@@ -1,7 +1,7 @@
 <template>
     <div class="comment">
         <div class="comment__header">
-            <VTitle>{{ comment.name }}</VTitle>
+            <VTitle class="comment__title">{{ comment.name }}</VTitle>
             <VHint>{{ comment.email }}</VHint>
         </div>
         <VParagraph>{{ comment.body }}</VParagraph>
@@ -26,5 +26,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+    .comment {
+        border-top: 1px solid $light_grey;
+        margin-bottom: 15px;
+        padding-top: 15px;
+        &__header {
+            display: flex;
+            align-items: center;
+        }
+        &__title {
+            margin-right: 15px;
+        }
+    }
 </style>

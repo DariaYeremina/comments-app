@@ -1,5 +1,6 @@
 <template>
     <button :class="[secondary ? 'button_secondary' : 'button']"
+            :disabled="disabled"
             @click="emitClick">
         <slot></slot>
     </button>
@@ -10,6 +11,10 @@ export default {
   name: 'VButton',
   props: {
     secondary: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -38,6 +43,14 @@ export default {
           color: $green;
           border-color: $green;
           background-color: #fff;
+        }
+        &[disabled] {
+          background-color: $light_grey;
+          cursor: default;
+          &:hover {
+            color: #fff;
+            border-color: transparent;
+          }
         }
         &_secondary {
           @extend .button;

@@ -2,9 +2,14 @@
     <div class="post">
         <VSubheading>{{ post.title }}</VSubheading>
         <VParagraph>{{ post.body }}</VParagraph>
+        <VComment v-for="(comment, index) in comments"
+                  :key="index"
+                  :comment="comment"></VComment>
         <VButton class="post__button"
                   secondary
-                  @click="fetchComments">{{ $t('buttons.showComments') }}</VButton>
+                  @click="manageComments">{{ buttonTitle }}</VButton>
+        <VAddComment v-if="addCommentVisible"
+                    @close="addCommentVisible = false"></VAddComment>
     </div>
 </template>
 
@@ -12,6 +17,8 @@
 import VSubheading from '@/components/atoms/VSubheading.vue';
 import VParagraph from '@/components/atoms/VParagraph.vue';
 import VButton from '@/components/atoms/VButton.vue';
+import VComment from '@/components/molecules/VComment.vue';
+import VAddComment from '@/components/molecules/VAddComment.vue';
 
 export default {
   name: 'VPost',
@@ -21,10 +28,30 @@ export default {
       required: true,
     },
   },
-  components: { VSubheading, VParagraph, VButton },
+  components: {
+    VSubheading, VParagraph, VButton, VComment, VAddComment,
+  },
+  data: () => ({
+    comments: [],
+    areComponentsVisible: false,
+    addCommentVisible: false,
+  }),
+  computed: {
+    buttonTitle() {
+      return this.areComponentsVisible ? this.$t('buttons.addComment') : this.$t('buttons.showComments');
+    },
+  },
   methods: {
-    fetchComments() {
-      this.$store.dispatch('posts/getCommentsPerPost', this.post.id);
+    manageComments() {
+      if (this.areComponentsVisible) {
+        this.addCommentVisible = true;
+      } else {
+        this.$store.dispatch('posts/getCommentsPerPost', this.post.id)
+          .then(({ data }) => {
+            this.comments = data.result;
+            this.areComponentsVisible = true;
+          });
+      }
     },
   },
 };

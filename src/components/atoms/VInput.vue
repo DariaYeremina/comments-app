@@ -1,20 +1,23 @@
 <template>
-    <div>
+    <div class="input__wrapper">
         <label v-if="label"
                 class="label">{{ label }}</label>
         <ValidationProvider :vid="$attrs.name"
                             :name="$attrs.name"
                             :rules="rules"
-                            v-slot="{ errors }"
-                            :mode="$attrs.mode">
-            <input :type="type"
-                    :placeholder="placeholder"
-                    :value="value"
-                    v-bind="$attrs"
-                    @focus="$emit('focus')"
-                    @input="updateInput($event)"
-                    class="input"
-                    :style="background"/>
+                            v-slot="{ errors }">
+            <component :is="tag"
+                        :type="type"
+                        :placeholder="placeholder"
+                        :value="value"
+                        v-bind="$attrs"
+                        @change="$emit('change')"
+                        @blur="$emit('blur')"
+                        @focus="$emit('focus')"
+                        @input="updateInput($event)"
+                        class="input"
+                        :class="{'textarea' : tag === 'textarea'}"
+                        :style="background"></component>
             <span v-if="errors && errors.length > 0"
                     class="error">{{ errors[0] }}</span>
          </ValidationProvider>
@@ -46,6 +49,10 @@ export default {
       type: String,
       default: '',
     },
+    tag: {
+      type: String,
+      default: 'input',
+    },
   },
   components: { ValidationProvider },
   computed: {
@@ -63,6 +70,9 @@ export default {
 
 <style lang="scss" scoped>
     .input {
+      &__wrapper {
+        margin-bottom: 20px;
+      }
         width: 100%;
         border: 1px solid $light_grey;
         padding: 7px 15px;
@@ -76,6 +86,10 @@ export default {
             border-color: $grey;
         }
     }
+    .textarea {
+      resize: none;
+      height: 150px;
+    }
     .label {
         display: block;
         margin-bottom: 10px;
@@ -84,5 +98,7 @@ export default {
     .error {
         font-weight: 700;
         color: $red;
+        display: inline-block;
+        margin-top: 5px;
     }
 </style>

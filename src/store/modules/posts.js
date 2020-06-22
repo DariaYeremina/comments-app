@@ -1,21 +1,27 @@
+import { getField, updateField } from 'vuex-map-fields';
 import posts from '@/services/http/api/posts';
+
+const defaultComment = () => ({
+  name: '',
+  email: '',
+  body: '',
+  post_id: null,
+});
 
 export default {
   namespaced: true,
   state: {
     postsPerUser: [],
-    commentsPerPost: [],
+    comment: defaultComment(),
   },
   getters: {
+    getField,
     getPostsPerUser: (state) => state.postsPerUser,
-    getCommentsPerPost: (state) => state.commentsPerPost,
   },
   mutations: {
+    updateField,
     setPostsPerUser(state, payload) {
       state.postsPerUser = payload;
-    },
-    setCommentsPerPost(state, payload) {
-      state.commentsPerPost = payload;
     },
   },
   actions: {
@@ -26,10 +32,7 @@ export default {
         });
     },
     getCommentsPerPost(context, postId) {
-      return posts.getCommentsPerPost(postId)
-        .then(({ data }) => {
-          context.commit('setCommentsPerPost', data.result);
-        });
+      return posts.getCommentsPerPost(postId);
     },
   },
 };

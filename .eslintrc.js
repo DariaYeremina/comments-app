@@ -16,7 +16,8 @@ module.exports = {
     'linebreak-style': ['error', 'windows'],
     'no-underscore-dangle': 'off',
     'consistent-return': 'off',
-    'no-return-assign': 'off'
+    'no-return-assign': 'off',
+    'no-unused-vars': 'off',
   },
   overrides: [
     {

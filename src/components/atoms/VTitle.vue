@@ -16,5 +16,6 @@ export default {
     font-weight: $normal;
     font-size: $font_m;
     text-align: center;
+    margin: 0;
 }
 </style>
