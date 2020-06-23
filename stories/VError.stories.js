@@ -1,8 +1,14 @@
 import { storiesOf } from '@storybook/vue';
-import VHeading from '@/components/atoms/VHeading.vue';
+import VError from '@/components/atoms/VError.vue';
+import { array } from '@storybook/addon-knobs';
 
-storiesOf('Atoms/Heading', module)
-  .add('Simple heading', () => ({
-    template: '<VHeading>Lorem ipsum</VHeading>',
-    components: { VHeading },
+const error = ['test', 'test2'];
+
+storiesOf('Atoms/Error', module)
+  .add('Simple error', () => ({
+    template: '<VError :errors="errors">Test text</VError>',
+    components: { VError },
+    props: {
+      errors: array('errors', error),
+    },
   }));

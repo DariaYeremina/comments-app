@@ -9,7 +9,7 @@ const data = {
 };
 
 storiesOf('Molecules/Comment', module)
-  .add('Post', () => ({
+  .add('Comment', () => ({
     template: '<VComment :comment="comment"></VComment>',
     props: {
       comment: {

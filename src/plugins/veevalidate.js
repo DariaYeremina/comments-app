@@ -20,6 +20,10 @@ const config = {
   },
 };
 
+configure(config);
+
+setInteractionMode('eager');
+
 extend('required', {
   ...required,
   message: i18n.t('validations.required'),
@@ -39,7 +43,3 @@ extend('regularField', {
   message: i18n.t('validations.regularField'),
   validate: (value) => value.match(regExp.regularField),
 });
-
-configure(config);
-
-setInteractionMode('eager');

@@ -9,6 +9,8 @@
                   secondary
                   @click="manageComments">{{ buttonTitle }}</VButton>
         <VAddComment v-if="addCommentVisible"
+                     :postId="post.id"
+                     @reload="getComments"
                     @close="addCommentVisible = false"></VAddComment>
     </div>
 </template>
@@ -41,16 +43,28 @@ export default {
       return this.areComponentsVisible ? this.$t('buttons.addComment') : this.$t('buttons.showComments');
     },
   },
+  watch: {
+    post: {
+      handler(val) {
+        this.areComponentsVisible = false;
+        this.comments = [];
+      },
+      deep: true,
+    },
+  },
   methods: {
+    getComments() {
+      this.$store.dispatch('posts/getCommentsPerPost', this.post.id)
+        .then(({ data }) => {
+          this.comments = data.result;
+          this.areComponentsVisible = true;
+        });
+    },
     manageComments() {
       if (this.areComponentsVisible) {
         this.addCommentVisible = true;
       } else {
-        this.$store.dispatch('posts/getCommentsPerPost', this.post.id)
-          .then(({ data }) => {
-            this.comments = data.result;
-            this.areComponentsVisible = true;
-          });
+        this.getComments();
       }
     },
   },

@@ -8,4 +8,7 @@ export default {
   getCommentsPerPost(postId) {
     return http.get(endpoints.get('commentsPerPost', { postId }));
   },
+  addComment(payload) {
+    return http.post(endpoints.get('comments'), payload);
+  },
 };

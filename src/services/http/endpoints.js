@@ -4,6 +4,7 @@ export default {
     users: 'users',
     postsPerUser: 'posts?user_id=:userId',
     commentsPerPost: 'comments?post_id=:postId',
+    comments: 'comments',
   },
   get(endpointLabel, params, query = true) {
     if (this.endpoints[endpointLabel] === undefined) {

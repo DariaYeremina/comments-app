@@ -2,15 +2,11 @@
     <div class="input__wrapper">
         <label v-if="label"
                 class="label">{{ label }}</label>
-        <ValidationProvider :vid="$attrs.name"
-                            :name="$attrs.name"
-                            :rules="rules"
-                            v-slot="{ errors }">
             <component :is="tag"
                         :type="type"
                         :placeholder="placeholder"
                         :value="value"
-                        v-bind="$attrs"
+                        :name="name"
                         @change="$emit('change')"
                         @blur="$emit('blur')"
                         @focus="$emit('focus')"
@@ -18,15 +14,10 @@
                         class="input"
                         :class="{'textarea' : tag === 'textarea'}"
                         :style="background"></component>
-            <span v-if="errors && errors.length > 0"
-                    class="error">{{ errors[0] }}</span>
-         </ValidationProvider>
     </div>
 </template>
 
 <script>
-import { ValidationProvider } from 'vee-validate';
-
 export default {
   name: 'VInput',
   props: {
@@ -41,10 +32,6 @@ export default {
     label: {
       type: String,
     },
-    rules: {
-      type: [Object, String],
-      default: '',
-    },
     icon: {
       type: String,
       default: '',
@@ -53,8 +40,11 @@ export default {
       type: String,
       default: 'input',
     },
+    name: {
+      type: String,
+      default: '',
+    },
   },
-  components: { ValidationProvider },
   computed: {
     background() {
       return this.icon ? `background-image: url(${this.icon})` : null;
@@ -94,11 +84,5 @@ export default {
         display: block;
         margin-bottom: 10px;
         font-size: $font_m;
-    }
-    .error {
-        font-weight: 700;
-        color: $red;
-        display: inline-block;
-        margin-top: 5px;
     }
 </style>

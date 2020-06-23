@@ -23,6 +23,9 @@ export default {
     setPostsPerUser(state, payload) {
       state.postsPerUser = payload;
     },
+    clearComment(state) {
+      state.comment = defaultComment();
+    },
   },
   actions: {
     getPostsPerUser(context, userId) {
@@ -33,6 +36,12 @@ export default {
     },
     getCommentsPerPost(context, postId) {
       return posts.getCommentsPerPost(postId);
+    },
+    addComment(context) {
+      return posts.addComment(context.state.comment)
+        .then(() => {
+          context.commit('clearComment');
+        });
     },
   },
 };
