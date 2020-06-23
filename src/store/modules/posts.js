@@ -28,8 +28,8 @@ export default {
     },
   },
   actions: {
-    getPostsPerUser(context, userId) {
-      return posts.getPostsPerUser(userId)
+    getPostsPerUser(context) {
+      return posts.getPostsPerUser(context.rootGetters['uesrs/getActiveUserId'])
         .then(({ data }) => {
           context.commit('setPostsPerUser', data.result);
         });

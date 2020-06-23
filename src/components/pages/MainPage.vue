@@ -1,9 +1,9 @@
 <template>
     <div class="wrapper">
         <VHeading>{{ $t('appTitle') }}</VHeading>
-        <VSelect :options="users"
+        <VSelect :options="getUsers"
                 :placeholder="$t('select.placeholder')"
-                @select="fetchPosts($event)"></VSelect>
+                @select="fetchPosts()"></VSelect>
         <VPostsList></VPostsList>
     </div>
 </template>
@@ -12,18 +12,19 @@
 import VHeading from '@/components/atoms/VHeading.vue';
 import VSelect from '@/components/molecules/VSelect.vue';
 import VPostsList from '@/components/organisms/VPostsList.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'MainPage',
   components: { VHeading, VSelect, VPostsList },
   computed: {
-    users() {
-      return this.$store.getters['users/getUsers'];
-    },
+    ...mapGetters('users', [
+      'getUsers',
+    ]),
   },
   methods: {
-    fetchPosts(event) {
-      this.$store.dispatch('posts/getPostsPerUser', event);
+    fetchPosts() {
+      this.$store.dispatch('posts/getPostsPerUser');
     },
   },
   beforeRouteEnter(from, to, next) {

@@ -2,6 +2,7 @@ export default {
   apiPrefix: `${process.env.VUE_APP_API_URL}`,
   endpoints: {
     users: 'users',
+    userData: 'users/:userId',
     postsPerUser: 'posts?user_id=:userId',
     commentsPerPost: 'comments?post_id=:postId',
     comments: 'comments',

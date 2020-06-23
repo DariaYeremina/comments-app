@@ -22,6 +22,7 @@ import vClickOutside from 'v-click-outside';
 import filters from '@/filters/filters';
 import carretUp from '@/assets/icons/carretUp.svg';
 import carretDown from '@/assets/icons/carretDown.svg';
+import { mapFields } from 'vuex-map-fields';
 
 export default {
   name: 'VSelect',
@@ -60,6 +61,11 @@ export default {
     inputIcon() {
       return this.isOptionsActive ? carretUp : carretDown;
     },
+    ...mapFields('users', [
+      'activeUserId',
+      'userData.first_name',
+      'userData.last_name',
+    ]),
   },
   watch: {
     options: {
@@ -79,10 +85,12 @@ export default {
     },
     select(option) {
       this.chosenOption = {
-        id: option[this.itemId],
         name: this.optionText(option),
       };
-      this.$emit('select', this.chosenOption.id);
+      this.activeUserId = option[this.itemId];
+      this.first_name = option.first_name;
+      this.last_name = option.last_name;
+      this.$emit('select');
       this.hideOptions();
     },
     optionText(option) {

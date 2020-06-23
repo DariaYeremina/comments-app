@@ -5,4 +5,7 @@ export default {
   getUsers() {
     return http.get(endpoints.get('users'));
   },
+  updateUserData(userId, payload) {
+    return http.put(endpoints.get('userData', { userId }), payload);
+  },
 };
