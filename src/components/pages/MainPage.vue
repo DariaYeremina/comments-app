@@ -4,6 +4,7 @@
         <VSelect :options="getUsers"
                 :placeholder="$t('select.placeholder')"
                 @select="fetchPosts()"></VSelect>
+        <VManageUserData v-if="getActiveUserId !== null"></VManageUserData>
         <VPostsList></VPostsList>
     </div>
 </template>
@@ -12,14 +13,18 @@
 import VHeading from '@/components/atoms/VHeading.vue';
 import VSelect from '@/components/molecules/VSelect.vue';
 import VPostsList from '@/components/organisms/VPostsList.vue';
+import VManageUserData from '@/components/organisms/VManageUserData.vue';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'MainPage',
-  components: { VHeading, VSelect, VPostsList },
+  components: {
+    VHeading, VSelect, VPostsList, VManageUserData,
+  },
   computed: {
     ...mapGetters('users', [
       'getUsers',
+      'getActiveUserId',
     ]),
   },
   methods: {

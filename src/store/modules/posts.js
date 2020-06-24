@@ -29,7 +29,7 @@ export default {
   },
   actions: {
     getPostsPerUser(context) {
-      return posts.getPostsPerUser(context.rootGetters['uesrs/getActiveUserId'])
+      return posts.getPostsPerUser(context.rootGetters['users/getActiveUserId'])
         .then(({ data }) => {
           context.commit('setPostsPerUser', data.result);
         });
