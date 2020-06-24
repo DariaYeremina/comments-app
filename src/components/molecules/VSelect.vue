@@ -52,7 +52,6 @@ export default {
   data: () => ({
     isOptionsActive: false,
     chosenOption: {
-      id: null,
       name: '',
     },
     localOptions: [],
@@ -71,6 +70,10 @@ export default {
     options: {
       handler(val) {
         this.localOptions = val;
+        if (this.activeUserId != null) {
+          const activeItem = this.localOptions.find((el) => el[this.itemId] === this.activeUserId);
+          this.chosenOption.name = this.optionText(activeItem);
+        }
       },
       immediate: true,
       deep: true,

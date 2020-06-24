@@ -6,6 +6,6 @@ export default {
     return http.get(endpoints.get('users'));
   },
   updateUserData(userId, payload) {
-    return http.patch(endpoints.get('userData', { userId }), payload);
+    return http.put(endpoints.get('userData', { userId }), payload);
   },
 };

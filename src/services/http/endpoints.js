@@ -17,6 +17,9 @@ export default {
 
     if (typeof (params) === 'object') {
       Object.keys(params).forEach((param) => url = url.replace(`:${param}`, params[param]));
+    } else if (typeof (params) === 'string') {
+      const regex = new RegExp(':.+');
+      url = url.replace(regex, params);
       separator = query ? '&' : '?';
     } else if (url.indexOf('/:') > 0) {
       url = url.substring(0, url.indexOf('/:'));

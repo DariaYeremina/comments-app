@@ -30,7 +30,7 @@
           </template>
           <template slot="actions">
             <VButton :disabled="isDisabled"
-                     @click="overwriteUserData">{{ $t('buttons.add') }}</VButton>
+                     @click="overwriteUserData">{{ $t('buttons.save') }}</VButton>
           </template>
         </VModal>
     </ValidationObserver>

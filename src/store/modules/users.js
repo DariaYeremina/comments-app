@@ -21,7 +21,8 @@ export default {
   mutations: {
     updateField,
     setUsers(state, payload) {
-      state.users = payload;
+      state.users = [];
+      payload.forEach((el) => state.users.push(el));
     },
     clearUserData(state) {
       state.userData = defaultUserData();

@@ -4,7 +4,8 @@
         <VSelect :options="getUsers"
                 :placeholder="$t('select.placeholder')"
                 @select="fetchPosts()"></VSelect>
-        <VManageUserData v-if="getActiveUserId !== null"></VManageUserData>
+        <VManageUserData v-if="getActiveUserId !== null"
+                        @reload="fetchUsers"></VManageUserData>
         <VPostsList></VPostsList>
     </div>
 </template>
@@ -31,10 +32,13 @@ export default {
     fetchPosts() {
       this.$store.dispatch('posts/getPostsPerUser');
     },
+    fetchUsers() {
+      this.$store.dispatch('users/getUsers');
+    },
   },
   beforeRouteEnter(from, to, next) {
     next((vm) => {
-      vm.$store.dispatch('users/getUsers');
+      vm.fetchUsers();
     });
   },
 };
