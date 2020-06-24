@@ -15,6 +15,7 @@ export default {
     addComment: 'Dodaj komentarz',
     add: 'Dodaj',
     editUserData: 'Eduytuj dane',
+    save: 'Zapisz',
   },
   addComment: {
     title: 'Dodaj komentarz',

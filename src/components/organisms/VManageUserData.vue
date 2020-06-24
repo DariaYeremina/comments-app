@@ -2,7 +2,8 @@
   <div class="wrapper">
     <VButton @click="openChangeUserData">{{ $t('buttons.editUserData') }}</VButton>
     <VChangeUserData v-if="changeUserDataVisible"
-                    @close="closeChangeUserData"></VChangeUserData>
+                    @close="closeChangeUserData"
+                    @reload="reloadEmitter"></VChangeUserData>
   </div>
 </template>
 
@@ -22,6 +23,9 @@ export default {
     },
     closeChangeUserData() {
       this.changeUserDataVisible = false;
+    },
+    reloadEmitter() {
+      this.$emit('reload');
     },
   },
 };
