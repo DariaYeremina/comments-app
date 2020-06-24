@@ -1,10 +1,18 @@
 // font-size
-$font_s: 1.2rem;
-$font_m: 1.4rem;
+$font_s: 1.4rem;
+$font_m: 1.6rem;
 $font_l: 1.8rem;
 $font_xl: 2.2rem;
-$font_xxl: 2.5rem;
+$font_xxl: 3.5rem;
 
 // font-weight
+$light: 300;
 $normal: 400;
 $bold: 700;
+
+// colors
+$green: #54AE6C;
+$red: #c73e3e;
+$grey: #292929;
+$light_grey: #bababa;
+$grey_transparent: rgba(186, 186, 186, 0.5);
