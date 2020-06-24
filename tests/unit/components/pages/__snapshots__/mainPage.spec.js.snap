@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainPage component Component renders correctly 1`] = `
+<div
+  class="wrapper"
+>
+  <vheading-stub>
+    appTitle
+  </vheading-stub>
+   
+  <vselect-stub
+    data-test="v-select"
+    itemid="id"
+    itemtext="fullname"
+    options=""
+    placeholder="select.placeholder"
+  />
+   
+  <vmanageuserdata-stub
+    data-test="v-manage-user-data"
+  />
+   
+  <vpostslist-stub />
+</div>
+`;
