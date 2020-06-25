@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { createLocalVue, mount } from '@vue/test-utils';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
