@@ -2,9 +2,11 @@
     <div class="wrapper">
         <VHeading>{{ $t('appTitle') }}</VHeading>
         <VSelect :options="getUsers"
+                data-test="v-select"
                 :placeholder="$t('select.placeholder')"
                 @select="fetchPosts()"></VSelect>
         <VManageUserData v-if="getActiveUserId !== null"
+                        data-test="v-manage-user-data"
                         @reload="fetchUsers"></VManageUserData>
         <VPostsList></VPostsList>
     </div>
