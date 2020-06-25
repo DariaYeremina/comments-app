@@ -32,13 +32,21 @@ export default {
     getUsers(context) {
       return users.getUsers()
         .then(({ data }) => {
-          context.commit('setUsers', data.result);
+          if (data._meta.code === 200) {
+            context.commit('setUsers', data.result);
+          } else {
+            context.commit('common/setResponseError', data._meta, { root: true });
+          }
         });
     },
     updateUserData(context) {
       return users.updateUserData(context.state.activeUserId, context.state.userData)
-        .then(() => {
-          context.commit('clearUserData');
+        .then(({ data }) => {
+          if (data._meta.code === 200 || data._meta.code === 201) {
+            context.commit('clearUserData');
+          } else {
+            context.commit('common/setResponseError', data._meta, { root: true });
+          }
         });
     },
   },

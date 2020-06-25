@@ -1,7 +1,13 @@
-export function onFulfilled(response) {
-  return response;
-}
+import http from '@/services/http/index';
+import store from '@/store/index';
 
-export function onRejected(error) {
-  return Promise.reject(error);
-}
+const successStatuses = [200, 201, 204];
+
+http.interceptors.response.use(
+  (response) => {
+    if (!successStatuses.includes(response._meta.status)) {
+      store.commit('common/setResponseError', response._meta);
+    }
+  },
+  (error) => Promise.reject(error),
+);

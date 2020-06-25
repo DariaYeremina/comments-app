@@ -56,8 +56,12 @@ export default {
     getComments() {
       this.$store.dispatch('posts/getCommentsPerPost', this.post.id)
         .then(({ data }) => {
-          this.comments = data.result;
-          this.areComponentsVisible = true;
+          if (data._meta.code === 200) {
+            this.comments = data.result;
+            this.areComponentsVisible = true;
+          } else {
+            this.$store.commit('common/setResponseError', data._meta);
+          }
         });
     },
     manageComments() {

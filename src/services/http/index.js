@@ -1,15 +1,22 @@
 import axios from 'axios';
-import { onFulfilled, onRejected } from '@/services/http/interceptors';
 
 export class Http {
   constructor() {
     this.axios = axios.create({
       headers: {
         'Content-type': 'application/json;charset=UTF-8',
-        'Access-Control-Allow-Origin': '*',
       },
     });
-    this.axios.interceptors.response.use(onFulfilled, onRejected);
+
+    this.interceptors = {
+      request: this.axios.interceptors.request,
+      response: this.axios.interceptors.response,
+    };
+
+    this.axios.interceptors.request.use(
+      (config) => Promise.resolve(config),
+      (error) => Promise.reject(error),
+    );
   }
 
   get(url, params) {
