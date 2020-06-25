@@ -9,6 +9,8 @@
                         data-test="v-manage-user-data"
                         @reload="fetchUsers"></VManageUserData>
         <VPostsList></VPostsList>
+      <VWarning v-if="error !== null"
+                @close="clearError"></VWarning>
     </div>
 </template>
 
@@ -17,6 +19,7 @@ import VHeading from '@/components/atoms/VHeading.vue';
 import VSelect from '@/components/molecules/VSelect.vue';
 import VPostsList from '@/components/organisms/VPostsList.vue';
 import VManageUserData from '@/components/organisms/VManageUserData.vue';
+import VWarning from '@/components/molecules/VWarning.vue';
 import { mapGetters } from 'vuex';
 
 export default {
@@ -29,6 +32,9 @@ export default {
       'getUsers',
       'getActiveUserId',
     ]),
+    error() {
+      return this.$store.getters['common/getResponseError'];
+    },
   },
   methods: {
     fetchPosts() {
@@ -36,6 +42,9 @@ export default {
     },
     fetchUsers() {
       this.$store.dispatch('users/getUsers');
+    },
+    clearError() {
+      this.$store.commit('common/setResponseError', null);
     },
   },
   beforeRouteEnter(from, to, next) {

@@ -31,7 +31,11 @@ export default {
     getPostsPerUser(context) {
       return posts.getPostsPerUser(context.rootGetters['users/getActiveUserId'])
         .then(({ data }) => {
-          context.commit('setPostsPerUser', data.result);
+          if (data._meta.code === 200) {
+            context.commit('setPostsPerUser', data.result);
+          } else {
+            context.commit('common/setResponseError', data._meta, { root: true });
+          }
         });
     },
     getCommentsPerPost(context, postId) {
@@ -39,8 +43,12 @@ export default {
     },
     addComment(context) {
       return posts.addComment(context.state.comment)
-        .then(() => {
-          context.commit('clearComment');
+        .then(({ data }) => {
+          if (data._meta.code === 200 || data._meta.code === 201) {
+            context.commit('clearComment');
+          } else {
+            context.commit('common/setResponseError', data._meta, { root: true });
+          }
         });
     },
   },
